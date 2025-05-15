@@ -20,18 +20,16 @@ body, html {
 
 .field {
     display: grid;
-    /*padding: 10%;*/
     gap: 1px;
-
 }
 
 .cell {
     border: 1px solid black;
-    /*width: 10px;*/
-    /*height: 10px;*/
     border-radius: 2px;
 }
 
 .selected {
-    background-color: red;
+    background-image: url("/Radiation_warning_symbol.png");
+    background-size: cover;
 }
+
