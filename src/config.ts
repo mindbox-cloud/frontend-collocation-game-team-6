@@ -7,7 +7,14 @@ export interface GameConfig {
     movesToWin?: number;
 }
 
-export const gameConfig: GameConfig = {};
+export const gameConfig: GameConfig = {
+    size: 10,
+    zombies: 3,
+    humans: 6,
+    zombieVision: 3,
+    humanVision: 3,
+    movesToWin: 50,
+};
 
 export function updateConfig(newValues: Partial<GameConfig>): void {
     Object.assign(gameConfig, newValues);
