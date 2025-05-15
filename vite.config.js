@@ -1,9 +1,20 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from "vite";
 
 export default defineConfig({
-    // GitHub Pages expects an index.html in the root directory
-    // so just run npm build before pushing to GitHub and this will rebuild our assets to the root
-    build: { outDir: '..' },
-    // needed for github pages just put the repo name here
-    base: '/frontend-collocation-game-team-6/',
+    // Base path for GitHub Pages deployment
+    // This should match your GitHub repository name
+    base: "/frontend-collocation-game-team-6/",
+
+    // Build configuration
+    build: {
+        outDir: "dist",
+        assetsDir: "assets",
+        emptyOutDir: true,
+    },
+
+    // Development server configuration
+    server: {
+        open: true,
+        port: 3000,
+    },
 });
