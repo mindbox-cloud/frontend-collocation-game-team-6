@@ -19,8 +19,8 @@ const renderField = () => {
     }
 
     field.innerHTML = ''
-    field.style.gridTemplateRows = `repeat(${size}, minmax(15px, 1fr))`
-    field.style.gridTemplateColumns = `repeat(${size}, minmax(15px, 1fr))`
+    field.style.gridTemplateRows = `repeat(${size}, minmax(30px, 1fr))`
+    field.style.gridTemplateColumns = `repeat(${size}, minmax(30px, 1fr))`
 
     for (let x = 0; x < size; x++) {
         for (let y = 0; y < size; y++) {

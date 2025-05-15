@@ -52,12 +52,12 @@ html {
     border-radius: 2px;
 }
 
-.cell_human {
+.human {
     background-image: url("/Human.png");
     background-size: cover;
 }
 
-.cell_zombie {
+.zombie {
     background-image: url("/Zombie.png");
     background-size: cover;
 }
