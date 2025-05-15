@@ -1,0 +1,43 @@
+name: Deploy GitHub Pages
+
+# Триггер — пуш в ветку main
+on:
+  push:
+    branches:
+      - main
+
+# Необходимые права для actions/pages
+permissions:
+  contents: read       # чтение кода
+  pages: write         # право деплоя
+  id-token: write      # для authenticate-pages
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Чекаутим код
+      - uses: actions/checkout@v3
+
+      # 2. (Опционально) Сборка: если у вас статический генератор (Jekyll, Hugo, Gatsby и т.п.)
+      #    замените команду на ваш билд-скрипт.
+      - name: Build site
+        run: |
+          # если чистый HTML/CSS — эта часть не нужна
+          # например: npm ci && npm run build
+          echo "No build step"
+
+      # 3. Конфигурируем Pages
+      - name: Configure Pages
+        uses: actions/configure-pages@v3
+
+      # 4. Упаковываем в артефакт всё содержимое docs/
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: docs
+
+      # 5. Деплоим на Pages
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
