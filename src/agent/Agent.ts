@@ -8,14 +8,22 @@ export class Agent {
     public id: number,
     public type: AgentType,
     public radius: number,
-    public maxStamina: number,
-    public stamina: number,
-    public position: [number, number]
+    public position: [number, number],
+    private maxStamina: number,
+    private stamina: number
   ) {}
 
   move(coordinates: Array<[number, number]>, onMove: () => void): void {}
 
-  updateStamina(): void {}
+  increaseStamina(): void {}
 
-  mutate(): void {}
+  decreaseStamina(): void {}
+
+  mutate(): void {
+    if (this.type === AgentType.ZOMBIE) return;
+
+    this.type = AgentType.ZOMBIE;
+    this.stamina = 0;
+    this.maxStamina = 0;
+  }
 }
