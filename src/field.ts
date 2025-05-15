@@ -27,6 +27,7 @@ const renderField = () => {
             const cell = document.createElement('div', {})
 
             cell.id = `${x}:${y}`
+            cell.className = `cell`
             field.appendChild(cell);
         }
     }
@@ -65,7 +66,7 @@ const paintCell = (x: number, y: number, type: AgentType) => {
     }
 
     targetCell.className = 'occupied';
-    targetCell.className = type === AgentType.HUMAN ? 'human' : 'zombie'
+    targetCell.className = type === AgentType.HUMAN ? 'cell human' : 'cell zombie'
 }
 
 
