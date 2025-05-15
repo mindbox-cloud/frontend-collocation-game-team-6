@@ -42,9 +42,8 @@ const nextStep = async () => {
 
         const suggestedPath = getPath(position, filteredAgents);
 
-        console.log(suggestedPath);
         await agent.move(suggestedPath, async () => {
-            await sleep(1000);
+            await sleep(500);
             renderAgents(mapAgentsToPositions(agents));
         });
     }

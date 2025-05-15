@@ -38,18 +38,7 @@ renderField()
 const button = document.getElementById('ok-button')
 
 button?.addEventListener('click', (e) => {
-    e.preventDefault()
-
-    const sizeInput = document.getElementById('size') as HTMLInputElement
-    const tickInput = document.getElementById('tick') as HTMLInputElement
-
-    const newSize = parseInt(sizeInput?.value)
-    config.tick = parseInt(tickInput?.value)
-
-    if (newSize !== config.size) {
-        config.size = newSize
-        renderField()
-    }
+    console.log('OK')
 })
 
 const paintCell = (x: number, y: number, type: AgentType) => {
@@ -71,7 +60,6 @@ const paintCell = (x: number, y: number, type: AgentType) => {
 
 
 export const renderAgents = (positions: { type: AgentType, position: Position }[]) => {
-console.log(123,positions)
     positions.forEach(({type, position}) => {
         paintCell(position[0], position[1], type)
     })
