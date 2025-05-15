@@ -1,34 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
+    <head>
+        <meta charset="UTF-8" />
 
-    <link rel="stylesheet" href="/src/style.css"/>
+        <link rel="stylesheet" href="/src/style.css" />
 
-  <title>Nuclear field</title>
-</head>
-<body>
-<div id="app">
-    <div class="head">
-        <h1>Game</h1>
+        <title>Zombie chase game</title>
+    </head>
+    <body>
+        <div id="app">
+            <div class="head">
+                <h1>Zombie chase game</h1>
+                <form action="#" class="form">
+                    <label class="label">
+                        Size:
+                        <input id="size" type="number" />
+                    </label>
+                    <label class="label">
+                        Zombies: <input id="zombies" type="number" />
+                    </label>
+                    <label class="label">
+                        Humans: <input id="humans" type="number" />
+                    </label>
+                    <label class="label">
+                        Zombie vision:
+                        <input id="zombie-vision" type="number"
+                    /></label>
+                    <label class="label">
+                        Human vision:
+                        <input id="human-vision" type="number"
+                    /></label>
+                    <label class="label">
+                        Moves to win:
+                        <input id="moves-to-win" type="number"
+                    /></label>
+                    <button id="ok-button" type="submit" class="button">
+                        Start game
+                    </button>
+                </form>
+            </div>
 
-        <form action="#">
-            <label>
-                Tick:
-                <input id="tick" type="number">
-            </label>
-            <label>
-                Size:
-                <input id="size" type="number">
-            </label>
-            <button id="ok-button" type="submit">Ok</button>
-        </form>
-    </div>
-
-    <div class="main">
-        <div id="field" class="field"></div>
-    </div>
-</div>
-<script type="module" src="/src/main.ts"></script>
-</body>
+            <div class="main">
+                <div id="field" class="field"></div>
+            </div>
+        </div>
+        <script type="module" src="/src/main.ts"></script>
+    </body>
 </html>
