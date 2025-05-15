@@ -2,12 +2,37 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+
+    <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+
+
+      <div class="head">
+        <h1>Game</h1>
+
+        <form action="#">
+          <label>
+            Tick:
+            <input id="tick" type="number">
+          </label>
+          <label>
+            Size:
+            <input id="size" type="number">
+          </label>
+          <button id="ok-button" type="submit">Ok</button>
+        </form>
+      </div>
+
+<div class="main">
+  <div id="field" class="field">
+
+  </div>
+
+</div>
+
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
