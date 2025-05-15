@@ -35,7 +35,7 @@ renderField()
 
 const button = document.getElementById('ok-button')
 
-button?.addEventListener('click', (e) => {
+button?.addEventListener('click', () => {
     console.log('OK')
 })
 

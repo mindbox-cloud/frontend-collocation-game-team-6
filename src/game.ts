@@ -7,6 +7,7 @@ import {sleep} from "./utils/common.ts";
 
 
 
+// @ts-ignore
 const humansArr = new Array(gameConfig.humans).fill(null).map((el, i, arr) => {
     return new Agent(
         `human_${i}`,
@@ -18,6 +19,7 @@ const humansArr = new Array(gameConfig.humans).fill(null).map((el, i, arr) => {
     )
 })
 
+// @ts-ignore
 const zombieArr = new Array(gameConfig.zombies).fill(null).map((el, i, arr) => {
     return new Agent(
         `zombie_${i}`,
