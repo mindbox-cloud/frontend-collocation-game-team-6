@@ -1,13 +1,11 @@
 import {AgentType} from "./agent/Agent.ts";
 import type {Position} from "./types.ts";
+import {gameConfig} from "./config.ts";
 
-const config = {
-    tick: 1000,
-    size: 10
-}
+
 
 const renderField = () => {
-    const {size} = config
+    const size = gameConfig.size || 10;
     if (size < 1 || size > 100) {
         return alert('Ты лох');
     }
