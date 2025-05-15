@@ -52,6 +52,16 @@ html {
     border-radius: 2px;
 }
 
+.cell_human {
+    background-image: url("/Human.png");
+    background-size: cover;
+}
+
+.cell_zombie {
+    background-image: url("/Zombie.png");
+    background-size: cover;
+}
+
 .selected {
     background-image: url("/Radiation_warning_symbol.png");
     background-size: cover;
