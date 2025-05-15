@@ -1,46 +1,55 @@
-name: Deploy GitHub Pages
+name: Deploy to GitHub Pages
 
-# Триггер — пуш в main
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
 
-# Права, необходимые для деплоя и чтения артефактов
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read      # чтение кода для сборки
-  pages: write        # деплой на Pages
-  id-token: write     # для authenticate-pages
-  actions: read       # требуется для actions/deploy-pages@v4
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-    # Рекомендуется указывать environment для Pages
-    environment:
-      name: github-pages
-
     steps:
-      # 1. Получаем код
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      # 2. (Опционально) Шаг сборки
-      - name: Build site
-        run: |
-          npm ci && npm run build
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
 
-      # 3. Конфигурируем Pages
-      - name: Configure Pages
-        uses: actions/configure-pages@v3
+      - name: Install dependencies
+        run: npm install --no-package-lock
 
-      # 4. Загружаем содержимое docs/ как артефакт
-      - name: Upload Pages Artifact
+      - name: Build
+        run: npm run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs
+          path: "./dist"
 
-      # 5. Деплоим на GitHub Pages
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        # В output: steps.deployment.outputs.page_url
