@@ -60,6 +60,10 @@ const paintCell = (x: number, y: number, type: AgentType) => {
 
 
 export const renderAgents = (positions: { type: AgentType, position: Position }[]) => {
+    const field = document.getElementById('field');
+    field && (field.innerHTML = '')
+    renderField()
+
     positions.forEach(({type, position}) => {
         paintCell(position[0], position[1], type)
     })

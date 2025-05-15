@@ -9,8 +9,8 @@ export interface GameConfig {
 
 export const gameConfig: GameConfig = {
     size: 10,
-    zombies: 3,
-    humans: 6,
+    zombies: 2,
+    humans: 10,
     zombieVision: 3,
     humanVision: 3,
     movesToWin: 50,

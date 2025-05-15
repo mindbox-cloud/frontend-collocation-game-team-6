@@ -22,7 +22,7 @@ export class Agent {
       return;
     }
 
-    if (coordinates.length > 1 && this.stamina > 0) {
+    if (coordinates.length > 0) {
       const steps = coordinates.slice(0, 2);
 
       for (const step of steps) {
