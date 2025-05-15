@@ -1,11 +1,12 @@
-import type { Position} from "../types.ts";
-import type {Agent} from "../agent/Agent.ts";
+import type { Position } from "../types.ts";
+import type { Agent } from "../agent/Agent.ts";
 
-export const getPath = (position: Position, agents: Agent[] ) => {
+export const getPath = (position: Position, agents: Agent[]) => {
+    const result: Position[] = [
+        [1, 2],
+        [1, 3],
+        [1, 4],
+    ];
 
-
-
-    const result: Position[] = [[1,2],[1,3],[1,4]]
-
-    return result
-}
+    return result;
+};

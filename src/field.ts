@@ -1,84 +1,80 @@
-import {AgentType} from "./agent/Agent.ts";
-import type {Position} from "./types.ts";
+import { AgentType } from "./agent/Agent.ts";
+import type { Position } from "./types.ts";
 
 const config = {
     tick: 1000,
-    size: 10
-}
+    size: 10,
+};
 
 const renderField = () => {
-    const {size} = config
+    const { size } = config;
     if (size < 1 || size > 100) {
-        return alert('Ты лох');
+        return alert("Ты лох");
     }
 
-    const field = document.getElementById('field');
+    const field = document.getElementById("field");
 
     if (!field) {
-        throw new Error()
+        throw new Error();
     }
 
-    field.innerHTML = ''
-    field.style.gridTemplateRows = `repeat(${size}, minmax(15px, 1fr))`
-    field.style.gridTemplateColumns = `repeat(${size}, minmax(15px, 1fr))`
+    field.innerHTML = "";
+    field.style.gridTemplateRows = `repeat(${size}, minmax(15px, 1fr))`;
+    field.style.gridTemplateColumns = `repeat(${size}, minmax(15px, 1fr))`;
 
     for (let x = 0; x < size; x++) {
         for (let y = 0; y < size; y++) {
-            const cell = document.createElement('div', {})
+            const cell = document.createElement("div", {});
 
-            cell.id = `${x}:${y}`
-            cell.className = `cell radiation-symbol`
+            cell.id = `${x}:${y}`;
+            cell.className = `cell radiation-symbol`;
             field.appendChild(cell);
         }
     }
-}
+};
 
-renderField()
+renderField();
 
-const button = document.getElementById('ok-button')
+const button = document.getElementById("ok-button");
 
-button?.addEventListener('click', (e) => {
-    e.preventDefault()
+button?.addEventListener("click", (e) => {
+    e.preventDefault();
 
-    const sizeInput = document.getElementById('size') as HTMLInputElement
-    const tickInput = document.getElementById('tick') as HTMLInputElement
+    const sizeInput = document.getElementById("size") as HTMLInputElement;
+    const tickInput = document.getElementById("tick") as HTMLInputElement;
 
-    const newSize = parseInt(sizeInput?.value)
-    config.tick = parseInt(tickInput?.value)
+    const newSize = parseInt(sizeInput?.value);
+    config.tick = parseInt(tickInput?.value);
 
     if (newSize !== config.size) {
-        config.size = newSize
-        renderField()
+        config.size = newSize;
+        renderField();
     }
 
-    paintCell()
-})
-
-
-
+    paintCell();
+});
 
 const paintCell = (x: number, y: number, type: AgentType) => {
-    const id = `${x}:${y}`
+    const id = `${x}:${y}`;
 
     const targetCell = document.getElementById(id);
 
     if (!targetCell) {
-        return
+        return;
     }
 
-    if (targetCell.classList.contains('occupied')) {
-        return
+    if (targetCell.classList.contains("occupied")) {
+        return;
     }
 
-    targetCell.className = 'occupied';
-    targetCell.className = type === AgentType.HUMAN ? 'human' : 'zombie'
-}
+    targetCell.className = "occupied";
+    targetCell.className = type === AgentType.HUMAN ? "human" : "zombie";
+};
 
-
-export const renderField = (positions: { type: AgentType, position: Position }[]) => {
-
-    positions.forEach(({type, position}) => {
-        paintCell(position[0], position[1], type)
-    })
-
-}
+export const renderField = (
+    positions: { type: AgentType; position: Position }[]
+) => {
+    positions.forEach(({ type, position }) => {
+        paintCell(position[0], position[1], type);
+    });
+};
