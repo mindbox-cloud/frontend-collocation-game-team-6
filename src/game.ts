@@ -75,17 +75,55 @@ const agents = [...humansArr, ...zombieArr]
 
 let step = 0
 
+// Добавим функцию для проверки наличия зомби вокруг человека
+const isZombieNearby = (humanPosition: Position, zombieAgents: Agent[]): boolean => {
+    const [humanX, humanY] = humanPosition;
+
+    return zombieAgents.some(zombie => {
+        const [zombieX, zombieY] = zombie.position;
+
+        // Проверяем, находится ли зомби на расстоянии 1 клетки от человека
+        const xDistance = Math.abs(humanX - zombieX);
+        const yDistance = Math.abs(humanY - zombieY);
+
+        // Зомби считается рядом, если он на расстоянии не более 1 клетки по каждой оси
+        return xDistance <= 1 && yDistance <= 1;
+    });
+};
 
 const nextStep = async () => {
+    // Проверяем, остались ли еще люди
+    const humansRemaining = agents.some(agent => agent.type === AgentType.HUMAN);
+
+    // Если людей не осталось, завершаем игру
+    if (!humansRemaining) {
+        console.log("Игра окончена! Все люди превратились в зомби.");
+        return; // Прекращаем рекурсивные вызовы
+    }
+
     for (let i = 0; i < agents.length; i++) {
         const agent = agents[i];
         const {id, position, type} = agent;
 
-        const filteredAgents = agents.filter(el => el.id !== id);
+        // Добавляем проверку наличия зомби вокруг человека в начале каждой итерации
+        if (type === AgentType.HUMAN) {
+            const zombies = agents.filter(a => a.type === AgentType.ZOMBIE && a.id !== id);
+            const hasZombieNearby = isZombieNearby(position, zombies);
 
-        const suggestedPath = getPath(position, agents, type === AgentType.HUMAN ? 'from' : 'to' );
+            if (hasZombieNearby) {
+                agent.mutate();
+                // Проверяем после мутации, остались ли еще люди
+                const anyHumansLeft = agents.some(a => a.type === AgentType.HUMAN);
+                if (!anyHumansLeft) {
+                    await sleep(100); // Даем время на рендеринг последних изменений
+                    renderAgents(mapAgentsToPositions(agents));
+                    alert("Игра окончена! Все люди превратились в зомби.");
+                    return; // Прекращаем выполнение если люди закончились
+                }
+            }
+        }
 
-        // console.log(suggestedPath)
+        const suggestedPath = getPath(position, agents, type === AgentType.HUMAN ? 'from' : 'to');
 
         await agent.move(suggestedPath, async () => {
             await sleep(100);
@@ -93,9 +131,27 @@ const nextStep = async () => {
         });
     }
 
-    step += 1
-    nextStep()
-}
+    step += 1;
+    nextStep();
+};
+//
+// const nextStep = async () => {
+//     for (let i = 0; i < agents.length; i++) {
+//
+//         const agent = agents[i];
+//         const { position, type} = agent;
+//
+//         const suggestedPath = getPath(position, agents, type === AgentType.HUMAN ? 'from' : 'to' );
+//
+//         await agent.move(suggestedPath, async () => {
+//             await sleep(100);
+//             renderAgents(mapAgentsToPositions(agents));
+//         });
+//     }
+//
+//     step += 1
+//     nextStep()
+// }
 
 
 const mapAgentsToPositions = (agents: Agent[]): { type: AgentType, position: Position }[] => {
