@@ -1,7 +1,7 @@
 import {Agent, AgentType} from "./agent/Agent.ts";
 import {getPath} from "./utils/getPath.ts";
 import {gameConfig} from "./config.ts";
-
+import {renderField} from "./field.ts";
 
 
 const humansArr = new Array(gameConfig.humans).fill(null).map((el, i, arr) => {
@@ -41,14 +41,21 @@ const nextStep = () => {
 
 
         console.log(suggestedPath)
-        agent.move(suggestedPath, () => console.log('moved'))
+        agent.move(suggestedPath, () => {
+
+            renderField()
+        })
+
+
 
     })
 
 
-
-
-
-
     step += 1
 }
+
+
+const mapAgentsToPositions = () => {
+
+}
+

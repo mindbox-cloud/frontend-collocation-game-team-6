@@ -75,7 +75,7 @@ const paintCell = (x: number, y: number, type: AgentType) => {
 }
 
 
-const rerenderField = (positions: { type: AgentType, position: Position }[]) => {
+export const renderField = (positions: { type: AgentType, position: Position }[]) => {
 
     positions.forEach(({type, position}) => {
         paintCell(position[0], position[1], type)
