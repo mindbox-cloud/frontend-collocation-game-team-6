@@ -27,7 +27,6 @@ const renderField = () => {
             const cell = document.createElement('div', {})
 
             cell.id = `${x}:${y}`
-            cell.className = `cell radiation-symbol`
             field.appendChild(cell);
         }
     }
@@ -71,7 +70,7 @@ const paintCell = (x: number, y: number, type: AgentType) => {
 
 
 export const renderAgents = (positions: { type: AgentType, position: Position }[]) => {
-
+console.log(123,positions)
     positions.forEach(({type, position}) => {
         paintCell(position[0], position[1], type)
     })
