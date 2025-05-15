@@ -50,12 +50,7 @@ button?.addEventListener('click', (e) => {
         config.size = newSize
         renderField()
     }
-
-    paintCell()
 })
-
-
-
 
 const paintCell = (x: number, y: number, type: AgentType) => {
     const id = `${x}:${y}`
@@ -75,7 +70,7 @@ const paintCell = (x: number, y: number, type: AgentType) => {
 }
 
 
-export const renderField = (positions: { type: AgentType, position: Position }[]) => {
+export const renderAgents = (positions: { type: AgentType, position: Position }[]) => {
 
     positions.forEach(({type, position}) => {
         paintCell(position[0], position[1], type)
