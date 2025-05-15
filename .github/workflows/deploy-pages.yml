@@ -27,8 +27,7 @@ jobs:
       # 2. (Опционально) Шаг сборки
       - name: Build site
         run: |
-          # например: npm ci && npm run build
-          echo "No build step"
+          npm ci && npm run build
 
       # 3. Конфигурируем Pages
       - name: Configure Pages
