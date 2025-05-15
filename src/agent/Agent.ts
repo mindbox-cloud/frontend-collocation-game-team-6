@@ -13,28 +13,33 @@ export class Agent {
     private stamina: number
   ) {}
 
-  public move(coordinates: Array<[number, number]>, onMove: () => void): void {
+  public async move(
+    coordinates: Array<[number, number]>,
+    onMove: () => Promise<void>
+  ): Promise<void> {
     if (coordinates.length === 0) {
       this.increaseStamina();
       return;
     }
 
     if (coordinates.length > 1 && this.stamina > 0) {
-      coordinates.slice(0, 2).forEach((coordinate) => {
-        this.updatePosition(coordinate, onMove);
-      });
+      const steps = coordinates.slice(0, 2);
+
+      for (const step of steps) {
+        await this.updatePosition(step, onMove);
+      }
       this.decreaseStamina();
     } else {
-      this.updatePosition(coordinates[0], onMove);
+      await this.updatePosition(coordinates[0], onMove);
     }
   }
 
   private updatePosition(
     coordinate: [number, number],
-    onMove: () => void
-  ): void {
+    onMove: () => Promise<void>
+  ): Promise<void> {
     this.position = coordinate;
-    onMove();
+    return onMove();
   }
 
   private increaseStamina(): void {
